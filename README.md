@@ -8,6 +8,9 @@
 ##　画面遷移図
 https://www.figma.com/design/t8VxWCFayqq4LdMspDKrCx/uo_app?node-id=0-1&t=QfCPaOTs7LyFkw1b-1
 
+##  er図
+[![Image from Gyazo](https://i.gyazo.com/c67d96fe1a58808e57c4a0b42b63764f.png)](https://gyazo.com/c67d96fe1a58808e57c4a0b42b63764f)
+
 ## 2. このアイデアはどこから生まれたか
 ### 2-1. きっかけとなった体験・感情
 長女が小学校に入学した際、保育園時代とのギャップによる配布物管理の負担に苦労したことがきっかけです。
