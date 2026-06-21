@@ -60,3 +60,5 @@ group :development do
   # gem "spring"
 end
 
+gem 'sorcery', '0.16.5'
+gem 'carrierwave', '2.2.2'
