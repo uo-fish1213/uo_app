@@ -10,39 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_06_21_130600) do
+ActiveRecord::Schema[7.1].define(version: 2026_06_23_023218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "families", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id", null: false
+    t.string "family_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_families_on_user_id"
-  end
-
-  create_table "prints", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.string "print_image"
-    t.bigint "family_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["family_id"], name: "index_prints_on_family_id"
+    t.index ["family_code"], name: "index_families_on_family_code", unique: true
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "user_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "family_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["family_id"], name: "index_users_on_family_id"
   end
 
-  add_foreign_key "families", "users"
-  add_foreign_key "prints", "families"
+  add_foreign_key "users", "families"
 end
