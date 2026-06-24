@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to login_path, success: 'ユーザー登録が完了しました'
     else
-      flash.now[:danger] = 'ユーザー登録に失敗しました'
+      flash.now[:danger] = 'ユーザー登録に失敗しました。入力内容を確認してください'
       render :new
     end
   end
@@ -16,6 +16,6 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :family_code)
   end
 end
