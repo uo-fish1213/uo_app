@@ -5,17 +5,18 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    
     if @user.save
-      redirect_to login_path, success: 'ユーザー登録が完了しました'
-    else
-      flash.now[:danger] = 'ユーザー登録に失敗しました。入力内容を確認してください'
-      render :new
+        redirect_to root_path, success: 'ユーザー登録が完了しました'
+      else
+        flash.now[:danger] = 'ユーザー登録に失敗しました'
+        render :new, status: :unprocessable_entity
     end
   end
-  
+
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :family_code)
+    params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :family_code)
   end
 end
