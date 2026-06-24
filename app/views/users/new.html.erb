@@ -1,0 +1,50 @@
+<div class="form-container">
+  <h2 class="form-title">新規ユーザー登録</h2>
+  
+  <%= form_with model: @user, url: users_path, local: true, class: 'user-form' do |f| %>
+ 
+    <!-- エラーメッセージ表示（共通パーシャル） -->
+    <%= render 'shared/error_messages', object: @user %>
+
+
+    <!-- ユーザー名 -->
+    <div class="form-group">
+      <%= f.label :user_name, 'ユーザー名', class: 'form-label' %>
+      <%= f.text_field :user_name, class: 'form-input', placeholder: 'ユーザー名を入力' %>
+    </div>
+    
+    <!-- メールアドレス -->
+    <div class="form-group">
+      <%= f.label :email, 'eメールアドレス', class: 'form-label' %>
+      <%= f.email_field :email, class: 'form-input', placeholder: 'example@email.com' %>
+    </div>
+    
+    <!-- パスワード -->
+    <div class="form-group">
+      <%= f.label :password, 'パスワード', class: 'form-label' %>
+      <%= f.password_field :password, class: 'form-input', placeholder: '8文字以上' %>
+    </div>
+    
+    <!-- パスワード確認 -->
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'パスワード確認', class: 'form-label' %>
+      <%= f.password_field :password_confirmation, class: 'form-input', placeholder: 'パスワードを再入力' %>
+    </div>
+    
+    <!-- 家族コード -->
+    <div class="form-group">
+      <%= f.label :family_code, '家族コード', class: 'form-label' %>
+      <%= f.text_field :family_code, class: 'form-input', placeholder: '既に発行されている場合のみ入力' %>
+    </div>
+    
+    <!-- 登録ボタン -->
+    <div class="form-actions">
+      <%= f.submit '登録', class: 'btn-primary' %>
+    </div>
+  <% end %>
+  
+  <!-- ログインリンク -->
+  <div class="form-footer">
+    <p>すでにアカウントをお持ちの方は<%= link_to 'こちら', login_path, class: 'form-link' %>からログイン</p>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="header-container">
+    <h1 class="header-logo">
+      <%= link_to 'ペアプリtotomo', root_path, class: 'header-logo-link' %>
+    </h1>
+    
+    <nav class="header-nav">
+      <% if logged_in? %>
+        <%= link_to 'プリント一覧', prints_path, class: 'header-nav-link' %>
+        <%= link_to 'ログアウト', logout_path, method: :delete, class: 'header-nav-link' %>
+      <% else %>
+        <%= link_to 'ログイン', login_path, class: 'header-nav-link' %>
+        <%= link_to '新規登録', new_user_path, class: 'header-nav-link' %>
+      <% end %>
+    </nav>
+  </div>
+</header>
