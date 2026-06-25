@@ -94,4 +94,12 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Render のホスト名を許可
+  if ENV['RENDER_EXTERNAL_HOSTNAME'].present?
+    config.hosts << ENV['RENDER_EXTERNAL_HOSTNAME']
+  end
+
+  # 念のため、.onrender.com ドメインをすべて許可
+  config.hosts << /.*\.onrender\.com/
 end
