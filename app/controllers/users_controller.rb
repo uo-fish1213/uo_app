@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+   # ユーザー登録だけはログイン不要
+  before_action :require_login, except: [:new, :create]
+
   def new
     @user = User.new
   end
