@@ -14,3 +14,23 @@ main {
   flex: 1;
   padding: 2rem 0;
 }
+
+.main-content {
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+// 中央配置が必要なページ用の専用クラス
+.main-content--centered {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+// フォーム専用のレイアウト
+.main-content--form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+}
