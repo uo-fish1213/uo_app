@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   #user登録のルーティング
   resources :users, only: [:new, :create]
   
-  # ログイン関連のルーティング
-  get 'login', to: 'logins#new'
-  post 'login', to: 'logins#create'
-  delete 'logout', to: 'logins#destroy'
-
+  # ログイン関連
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  
   # Defines the root path route ("/")
   # root "posts#index"
   root 'top#index'
