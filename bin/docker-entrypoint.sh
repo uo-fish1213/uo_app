@@ -1,22 +1,34 @@
 #!/bin/bash
 set -e
 
-# データベースが起動するまで待つ（オプション）
-echo "Waiting for database..."
-until bundle exec rails db:migrate:status &> /dev/null
-do
-  echo "Database is unavailable - sleeping"
-  sleep 1
+echo "=== Docker Entrypoint Script Starting ==="
+
+# データベースが利用可能になるまで待機
+echo "Waiting for database to be ready..."
+
+max_attempts=30
+attempt=0
+
+until bundle exec rails runner "ActiveRecord::Base.connection.execute('SELECT 1')" > /dev/null 2>&1; do
+  attempt=$((attempt + 1))
+  
+  if [ $attempt -ge $max_attempts ]; then
+    echo "Database connection failed after $max_attempts attempts"
+    exit 1
+  fi
+  
+  echo "Database is unavailable - sleeping (attempt $attempt/$max_attempts)"
+  sleep 2
 done
+
+echo "Database is ready!"
 
 # マイグレーションを実行
 echo "Running database migrations..."
 bundle exec rails db:migrate
 
-# データベースにシードデータを投入（必要な場合のみ）
-# echo "Seeding database..."
-# bundle exec rails db:seed
+echo "Migrations completed successfully!"
 
-# アプリケーションを起動
-echo "Starting application..."
+# Puma サーバーを起動
+echo "Starting Puma server..."
 exec bundle exec puma -C config/puma.rb
