@@ -7,11 +7,12 @@ FROM registry.docker.com/library/ruby:$RUBY_VERSION
 # Rails app lives here
 WORKDIR /rails
 
-# Set development environment (本番環境の設定を削除)
-ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/usr/local/bundle"
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development:test"
 
-# Install packages needed for development
+# Install packages needed for production
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
     build-essential \
@@ -28,13 +29,17 @@ RUN apt-get update -qq && \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
 # Copy application code
 COPY . .
 
-# Expose port
-EXPOSE 3001
+# Precompile assets
+RUN bundle exec rails assets:precompile
 
-# Start the server
-CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3001"]
+# Expose port (Renderが自動的に設定)
+EXPOSE 3000
+
+# Start the server with Puma
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
