@@ -38,8 +38,12 @@ COPY . .
 # Precompile assets
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
+# Copy entrypoint script
+COPY bin/docker-entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/docker-entrypoint.sh
+
 # Expose port (Renderが自動的に設定)
 EXPOSE 3000
 
-# Start the server with Puma
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+# Set entrypoint
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
