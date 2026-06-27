@@ -36,7 +36,7 @@ RUN bundle install && \
 COPY . .
 
 # Precompile assets
-RUN bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 # Expose port (Renderが自動的に設定)
 EXPOSE 3000
