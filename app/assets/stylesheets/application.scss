@@ -10,3 +10,9 @@
 // レイアウト
 @import 'layouts/header';
 @import 'layouts/footer';
+
+// ベーススタイル
+@import "base";
+
+// ページ別スタイル
+@import "prints";

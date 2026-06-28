@@ -1,8 +1,14 @@
 class Print < ApplicationRecord
   belongs_to :user
 
+ # 画像アップロード
+  mount_uploader :image, ImageUploader
+
+  # バリデーション
   validates :image, presence: true
   validates :deadline, presence: true
+  validates :action_tag, presence: true
+  validates :child_tag, presence: true
 
   enum child_tag: {
     first_child: 0,

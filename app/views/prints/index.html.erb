@@ -1,0 +1,67 @@
+<div class="prints-index">
+  <div class="container">
+    <h1 class="page-title">プリント一覧</h1>
+    
+    <% if @prints.present? %>
+      <!-- プリントが存在する場合 -->
+      <div class="prints-grid">
+        <% @prints.each do |print| %>
+          <div class="print-card">
+            <%= link_to print_path(print), class: 'print-card-link' do %>
+              <!-- プリント画像 -->
+              <div class="print-card-image">
+                <% if print.image.present? && print.image.url.present? %>
+                  <%= image_tag print.image.url, alt: "プリント画像", class: 'print-image' %>
+                <% else %>
+                  <div class="print-image-placeholder">
+                    <span class="placeholder-text">画像なし</span>
+                  </div>
+                <% end %>
+              </div>
+              
+              <!-- カード本体 -->
+              <div class="print-card-body">
+                <!-- タグエリア -->
+                <div class="print-card-tags">
+                  <!-- 子供タグ（enumから表示） -->
+                  <div class="tag-group">
+                    <span class="tag tag-child">
+                      <%= I18n.t("enums.print.child_tag.#{print.child_tag}") %>
+                    </span>
+                  </div>
+                  
+                  <!-- アクションタグ（enumから表示） -->
+                  <div class="tag-group">
+                    <span class="tag tag-action <%= print.action_tag %>">
+                      <%= I18n.t("enums.print.action_tag.#{print.action_tag}") %>
+                    </span>
+                  </div>
+                </div>
+                
+                <!-- 締め切り -->
+                <% if print.deadline.present? %>
+                  <div class="print-card-deadline">
+                    <span class="deadline-icon">📅</span>
+                    <time class="deadline-date" datetime="<%= print.deadline %>">
+                      <%= l(print.deadline, format: :short) %>
+                    </time>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- プリントが存在しない場合 -->
+      <div class="no-prints-container">
+        <div class="no-prints-message">
+          <div class="no-prints-icon">📋</div>
+          <h2 class="no-prints-title">プリントがまだ登録されていません</h2>
+          <p class="no-prints-text">最初のプリントを登録してみましょう!</p>
+          <%= link_to '新規登録', new_print_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
