@@ -2,48 +2,53 @@
   <h1>プリント一覧</h1>
   
   <% if @prints.any? %>
-    <table class="prints-table">
-      <thead>
-        <tr>
-          <th>画像</th>
-          <th>子供</th>
-          <th>アクション</th>
-          <th>締め切り</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @prints.each do |print| %>
-          <tr>
-            <!-- 画像 -->
-            <td>
-              <%= link_to print_path(print) do %>
-                <% if print.image.present? %>
-                  <%= image_tag print.image.url, class: 'print-thumbnail' %>
-                <% else %>
-                  <span class="no-image">画像なし</span>
-                <% end %>
+    <div class="prints-grid">
+      <% @prints.each do |print| %>
+        <div class="print-card">
+          <!-- 画像(クリックで詳細画面へ) -->
+          <%= link_to print_path(print), class: 'print-image-link' do %>
+            <div class="print-image">
+              <% if print.image? %>
+                <%= image_tag print.image.url, alt: "プリント画像", class: 'print-thumbnail' %>
+              <% else %>
+                <div class="no-image">
+                  <i class="bi bi-image"></i>
+                  <p>画像なし</p>
+                </div>
               <% end %>
-            </td>
-            
-            <!-- 子どもタグ(文字列として表示) -->
-            <td>
-              <span class="tag tag-child"><%= print.child_tag %></span>
-            </td>
-            
-            <!-- アクションタグ(文字列として表示) -->
-            <td>
-              <span class="tag tag-action"><%= print.action_tag %></span>
-            </td>
+            </div>
+          <% end %>
+          
+          <!-- カード情報エリア -->
+          <div class="print-info">
+            <!-- タグ -->
+            <div class="print-tags">
+              <span class="tag child-tag">
+                <i class="bi bi-person"></i>
+                <%= print.child_tag_i18n %>
+              </span>
+              <span class="tag action-tag">
+                <i class="bi bi-lightning"></i>
+                <%= print.action_tag_i18n %>
+              </span>
+            </div>
             
             <!-- 締め切り -->
-            <td>
-              <%= l print.deadline, format: :short %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            <div class="print-deadline">
+              <i class="bi bi-calendar-event"></i>
+              <span class="deadline-text">
+                <%= l print.deadline, format: :short if print.deadline.present? %>
+              </span>
+            </div>
+          </div> <!-- ← ここに > を追加! -->
+        </div>
+      <% end %>
+    </div>
   <% else %>
-    <p class="no-data">プリントがまだありません</p>
+    <!-- プリントがない場合 -->
+    <div class="no-prints">
+      <i class="bi bi-inbox"></i>
+      <p>プリントがまだありません</p>
+    </div>
   <% end %>
 </div>
