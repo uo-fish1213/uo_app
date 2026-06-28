@@ -1,21 +1,25 @@
-<!-- app/views/layouts/_header.html.erb -->
 <header class="header">
   <div class="header-container">
     <h1 class="header-logo">
-        ペアプリtotomo
+      ペアプリtotomo
     </h1>
     
     <% unless @simple_header %>
       <nav class="header-nav">
         <% if logged_in? %>
-          <%# プリント一覧ページ以外で表示 %>
+          <%# プリント一覧ページ以外で「プリント一覧」リンクを表示 %>
           <%= link_to 'プリント一覧', prints_path, class: 'header-nav-link' unless current_page?(prints_path) %>
-          <%# data: { turbo_method: :delete } に変更 %>
+          
+          <%# プリント一覧ページでのみ「新規プリント登録」ボタンを表示 %>
+          <% if current_page?(prints_path) %>
+            <%= link_to '新規プリント登録', new_print_path, class: 'header-nav-link' %>
+          <% end %>
+          
           <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete }, class: 'header-nav-link' %>
         <% else %>
           <%= link_to 'ログイン', login_path, class: 'header-nav-link' %>
           <%= link_to '新規登録', new_user_path, class: 'header-nav-link' %>
-    <% end %>
+        <% end %>
       </nav>
     <% end %>
   </div>
