@@ -10,7 +10,7 @@ class Print < ApplicationRecord
   validates :action_tag, presence: true
   validates :child_tag, presence: true
 
-  enum :child_tag, [:first_child, :second_child, :third_child]
+  enum :child_tag, [:first_child, :second_child, :third_child, :fourth_child]
   
   enum :action_tag, [:submit, :prepare, :payment, :event, :read_only]
   
