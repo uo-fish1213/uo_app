@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
+        auto_login(@user)  # 自動ログイン
         redirect_to root_path, success: 'ユーザー登録が完了しました'
       else
         flash.now[:danger] = 'ユーザー登録に失敗しました'

@@ -47,3 +47,11 @@ EXPOSE 3000
 
 # Set entrypoint
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
+
+# ImageMagick をインストール
+RUN apt-get update -qq && apt-get install -y \
+  build-essential \
+  libpq-dev \
+  nodejs \
+  imagemagick \
+  libmagickwand-dev

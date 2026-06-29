@@ -64,3 +64,5 @@ gem 'sorcery', '~> 0.17.0'
 gem 'carrierwave', '2.2.2'
 gem "dartsass-rails" #Sass ファイルを CSS に変換する gem
 gem 'rails-i18n'
+# 画像処理
+gem 'mini_magick', '~> 4.11'

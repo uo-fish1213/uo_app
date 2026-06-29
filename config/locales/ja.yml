@@ -1,0 +1,23 @@
+ja:
+  activerecord:
+    models:
+      print: プリント
+    attributes:
+      print:
+        child_tag: 子ども
+        action_tag: アクション
+        deadline: 締め切り
+  
+  enums:
+    print:
+      child_tag:
+        first_child: 第一子
+        second_child: 第二子
+        third_child: 第三子
+        fourth_child: 第四子
+      action_tag:
+        submit: 出してね（提出が必要）
+        prepare: 用意してね（持ち物準備）
+        payment:  現金いるよ（集金・引き落とし情報）
+        event: 当日見てね（イベント・行事の詳細）
+        read_only: 読むだけでOK（お知らせ・チラシなど

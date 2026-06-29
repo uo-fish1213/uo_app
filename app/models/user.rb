@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :prints, dependent: :destroy
   authenticates_with_sorcery!
 
   # 関連付け
