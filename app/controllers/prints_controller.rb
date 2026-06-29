@@ -24,7 +24,19 @@ class PrintsController < ApplicationController
     if @print.save
       redirect_to prints_path, notice: 'プリントを作成しました'
     else
+       # バリデーションエラー時、アップロードされた画像を削除
+      @print.remove_image! if @print.image.present?
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @print.update(print_params)
+      redirect_to @print, notice: 'プリントを更新しました'
+    else
+      # 更新失敗時も同様に画像を削除
+      @print.reload  # 元の状態に戻す
+      render :edit, status: :unprocessable_entity
     end
   end
   

@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>プリント登録</h1>
+
+  <%= form_with model: @print, local: true do |f| %>
+    <% if @print.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(@print.errors.count, "件のエラー") %>があります</h4>
+        <ul>
+          <% @print.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :image, 'プリント画像' %>
+      <%= f.file_field :image, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :child_tag, '子供' %>
+      <%= f.select :child_tag, Print.child_tags_for_select, {}, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :action_tag, 'アクション' %>
+      <%= f.select :action_tag, Print.action_tags_for_select, {}, class: 'form-control' %>
+    </div>
+
+    
+    <div class="form-group">
+      <%= f.label :deadline, '期限' %>
+      <%= f.date_field :deadline, class: 'form-control' %>
+    </div>
+
+
+    <%= f.submit '登録', class: 'btn btn-primary' %>
+  <% end %>
+</div>
