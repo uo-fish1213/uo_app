@@ -19,7 +19,7 @@ class PrintsController < ApplicationController
   # プリント登録画面でフォーム送信時の処理
   # (プリント登録画面の実装時に使用)
   def create
-    @print = Print.new(print_params)
+   @print = current_user.prints.build(print_params)
     
     if @print.save
       redirect_to prints_path, notice: 'プリントを作成しました'
