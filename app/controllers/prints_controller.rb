@@ -1,9 +1,9 @@
 class PrintsController < ApplicationController
   before_action :require_login  # ← 全アクションでログインを必須にする
   
-  # プリント一覧画面の表示
+  # プリント一覧画面の表示(締め切りが近い順に表示)
   def index
-    @prints = Print.order(created_at: :desc)
+    @prints = current_user.prints.order(deadline: :asc)
   end
   
   # プリント詳細画面の表示

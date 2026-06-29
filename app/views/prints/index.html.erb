@@ -37,7 +37,7 @@
             <div class="print-deadline">
               <i class="bi bi-calendar-event"></i>
               <span class="deadline-text">
-                <%= l print.deadline, format: :short if print.deadline.present? %>
+                <%= print.deadline.strftime('%Y/%m/%d') if print.deadline.present? %>
               </span>
             </div>
           </div> <!-- ← ここに > を追加! -->
