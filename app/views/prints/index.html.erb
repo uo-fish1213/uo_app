@@ -7,13 +7,15 @@
         <div class="print-card">
           <!-- 画像(クリックで詳細画面へ) -->
           <%= link_to print_path(print), class: 'print-image-link' do %>
-            <div class="print-image">
+            <div class="print-card-image">
               <% if print.image? %>
-                <%= image_tag print.image.url, alt: "プリント画像", class: 'print-thumbnail' %>
+                <%= image_tag print.image.url, alt: "プリント画像", class: 'print-image' %>
               <% else %>
-                <div class="no-image">
-                  <i class="bi bi-image"></i>
-                  <p>画像なし</p>
+                <div class="print-image-placeholder">
+                  <span class="placeholder-text">
+                    <i class="bi bi-image"></i>
+                    画像なし
+                  </span>
                 </div>
               <% end %>
             </div>
@@ -40,7 +42,7 @@
                 <%= print.deadline.strftime('%Y/%m/%d') if print.deadline.present? %>
               </span>
             </div>
-          </div> <!-- ← ここに > を追加! -->
+          </div> 
         </div>
       <% end %>
     </div>
