@@ -43,6 +43,6 @@ class PrintsController < ApplicationController
   private
   
   def print_params
-    params.require(:print).permit(:image, :deadline, :action_tag, child_ids: [])
+    params.require(:print).permit(:image, :child_tag, :action_tag, :deadline)
   end
 end
