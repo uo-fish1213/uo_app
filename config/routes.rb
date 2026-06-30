@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
     # ログイン後のメインページ
   root 'prints#index'
-  resources :prints, only: [:index, :new, :show, :update]
+  resources :prints, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   
   #user登録のルーティング
   resources :users, only: [:new, :create]

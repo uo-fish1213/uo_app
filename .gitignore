@@ -36,3 +36,7 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+/tmp/uploads/*
+echo "/public/uploads" >> .gitignore
+/public/uploads

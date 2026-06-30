@@ -1,0 +1,32 @@
+<%# app/views/prints/_form.html.erb %>
+<%= form_with model: print, data: { turbo: false }, class: "prints-form" do |f| %>
+  <div class="form-item">
+    <%= f.label :image, "画像", class: "form-label" %>
+    <%= f.file_field :image, class: "form-control", accept: 'image/*' %>
+  </div>
+  
+  <div class="form-item">
+    <%= f.label :child_tag, "子ども選択", class: "form-label" %>
+    <%= f.select :child_tag, 
+                 Print.child_tags.keys.map { |k| [I18n.t("enums.print.child_tag.#{k}"), k] }, 
+                 { prompt: "選択してください" }, 
+                 class: "form-select" %>
+  </div>
+  
+  <div class="form-item">
+    <%= f.label :action_tag, "アクションタグ", class: "form-label" %>
+    <%= f.select :action_tag, 
+                 Print.action_tags.keys.map { |k| [I18n.t("enums.print.action_tag.#{k}"), k] }, 
+                 { prompt: "選択してください" }, 
+                 class: "form-select" %>
+  </div>
+  
+  <div class="form-item">
+    <%= f.label :deadline, "期限", class: "form-label" %>
+    <%= f.date_field :deadline, class: "form-control" %>
+  </div>
+  
+  <div class="submit-button-area">
+    <%= f.submit "保存", class: "btn btn-primary" %>
+  </div>
+<% end %>

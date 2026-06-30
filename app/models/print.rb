@@ -1,7 +1,7 @@
 class Print < ApplicationRecord
   belongs_to :user
 
- # 画像アップロード
+ # 画像アップロード(carrierwave の設定)
   mount_uploader :image, ImageUploader
 
   # バリデーション
@@ -10,20 +10,9 @@ class Print < ApplicationRecord
   validates :action_tag, presence: true
   validates :child_tag, presence: true
 
-  enum child_tag: {
-    first_child: 0,
-    second_child: 1,
-    third_child: 2,
-    fourth_child: 3
-  }
+  enum :child_tag, [:first_child, :second_child, :third_child, :fourth_child]
   
-  enum action_tag: {
-    submit: 0,
-    prepare: 1,
-    payment: 2,
-    event: 3,
-    read_only: 4
-  }
+  enum :action_tag, [:submit, :prepare, :payment, :event, :read_only]
   
    # 表示名を返すメソッド
   def child_tag_i18n
