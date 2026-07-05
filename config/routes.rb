@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   #user登録のルーティング
   resources :users, only: [:new, :create]
+  
   # ログイン関連
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
