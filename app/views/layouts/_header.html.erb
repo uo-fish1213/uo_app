@@ -10,9 +10,9 @@
           <%# プリント一覧ページ以外で「プリント一覧」リンクを表示 %>
           <%= link_to 'プリント一覧', prints_path, class: 'header-nav-link' unless current_page?(prints_path) %>
           
-          <%# プリント一覧ページでのみ「新規プリント登録」ボタンを表示 %>
+          <%# プリント一覧ページでのみ「家族連携」ボタンを表示 %>
           <% if current_page?(prints_path) %>
-            <%= link_to '新規プリント登録', new_print_path, class: 'header-nav-link' %>
+          <%= link_to '家族登録', select_family_connections_path, class: 'header-nav-link' %>
           <% end %>
           
           <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete }, class: 'header-nav-link' %>
