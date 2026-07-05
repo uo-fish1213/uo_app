@@ -13,6 +13,15 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
+  namespace :family do
+    resource :connection, only: [:new, :create] do
+      collection do
+        get :select
+      end
+    end
+    resources :codes, only: [:new, :create]
+    resource :join, only: [:new, :create]
+  end
   # Defines the root path route ("/")
   # root "posts#index"
 
