@@ -1,0 +1,17 @@
+<div class="family-connection-select">
+  <h1>家族連携</h1>
+  
+  <div class="connection-options">
+    <%# 家族を招待する %>
+    <div class="option-card">
+      <%= link_to '家族を招待する', new_family_code_path, class: 'btn-common' %>
+    </div>
+    
+    <%# すでにコードを持っている場合 %>
+    <div class="option-card">
+      <p>すでに家族が発行したコードをお持ちの方は
+        <%= link_to 'こちら', new_family_join_path %>
+      </p>
+    </div>
+  </div>
+</div>
