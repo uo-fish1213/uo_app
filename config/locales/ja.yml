@@ -7,7 +7,19 @@ ja:
         child_tag: 子ども
         action_tag: アクション
         deadline: 締め切り
-  
+        image: 画像
+    errors:
+      models:
+        print:
+          attributes:
+            child_tag:
+              blank: が未選択です
+            action_tag:
+              blank: が未選択です
+            deadline:
+              blank: が未選択です
+            image:
+              blank: を選択してください        
   enums:
     print:
       child_tag:
@@ -21,3 +33,4 @@ ja:
         payment:  現金いるよ（集金・引き落とし）
         event: 当日見てね（イベント・行事）
         read_only: 読むだけでOK（お知らせ・チラシなど)
+  
