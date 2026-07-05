@@ -9,7 +9,9 @@ class PrintsController < ApplicationController
   # プリント詳細画面の表示
   def show
     @print = Print.find(params[:id])
+    @simple_header = true
   end
+  
   #　プリント詳細画面で、プリント削除のアクション
   def destroy
     @print = Print.find(params[:id])

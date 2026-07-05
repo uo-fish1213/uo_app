@@ -1,17 +1,19 @@
 <div class="print-detail">
   <!-- プリント画像 -->
-  <%= image_tag @print.image_url, class: 'print-image' %>
+  <%= image_tag @print.image.url, class: 'print-image' %>
   
   <!-- 締め切り日 -->
   <p>締め切り日: <%= @print.deadline %></p>
   
   <!-- 子供タグ -->
-  <p>子供: <%= @print.child_tags.map(&:name).join(', ') %></p>
+  <p>子供: <%= @print.child_tag_i18n %></p>
   
   <!-- アクションタグ -->
-  <p>アクション: <%= @print.action_tags.map(&:name).join(', ') %></p>
+  <p>アクション: <%= @print.action_tag_i18n %></p>
   
-  <!-- ボタン -->
-  <%= link_to '一覧へ戻る', prints_path, class: 'btn' %>
-  <%= button_to '削除', print_path(@print), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger' %>
+   <!-- ボタン -->
+  <div class="button-group">
+    <%= link_to '一覧へ戻る', prints_path, class: 'btn btn-secondary' %>
+    <%= button_to '削除', print_path(@print), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-danger' %>
+  </div>
 </div>
