@@ -13,7 +13,7 @@
   
    <!-- ボタン -->
   <div class="button-group">
-    <%= link_to '一覧へ戻る', prints_path, class: 'btn btn-secondary' %>
-    <%= button_to '削除', print_path(@print), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: 'btn btn-danger' %>
+    <%= link_to '一覧へ戻る', prints_path, class: "btn btn-common" %>
+    <%= button_to '削除', print_path(@print), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, class: "btn btn-common" %>
   </div>
 </div>
