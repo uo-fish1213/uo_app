@@ -1,6 +1,9 @@
 <div class="prints-container">
-  <h1>プリント一覧</h1>
-  
+  <div class="prints-header">
+    <h1 class="page-title">プリント一覧</h1>
+    <%= link_to "新規プリント登録", new_print_path, class: "btn-common" %>
+  </div>
+
   <% if @prints.any? %>
     <div class="prints-grid">
       <% @prints.each do |print| %>
