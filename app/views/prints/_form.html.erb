@@ -1,5 +1,7 @@
 <%# app/views/prints/_form.html.erb %>
 <%= form_with model: print, data: { turbo: false } do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
   <div class="mb-5">
     <%= f.label :image, "画像", class: "form-label" %>
     <%= f.file_field :image, class: "form-control", accept: 'image/*' %>

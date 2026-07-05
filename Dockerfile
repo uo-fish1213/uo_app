@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Ruby version
-ARG RUBY_VERSION=3.2.2
+ARG RUBY_VERSION=3.2.3
 FROM registry.docker.com/library/ruby:$RUBY_VERSION
 
 # Rails app lives here

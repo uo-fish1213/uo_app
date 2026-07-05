@@ -67,3 +67,4 @@ gem 'rails-i18n'
 # 画像処理
 gem 'mini_magick', '~> 4.11'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'bootstrap', '~> 5.2.0'

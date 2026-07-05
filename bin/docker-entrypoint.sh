@@ -9,7 +9,8 @@ echo "Waiting for database to be ready..."
 max_attempts=30
 attempt=0
 
-until bundle exec rails runner "ActiveRecord::Base.connection.execute('SELECT 1')" > /dev/null 2>&1; do
+# pg_isready を使用した接続確認
+until pg_isready -h "$DATABASE_HOST" -U "$DATABASE_USER" -d "postgres" > /dev/null 2>&1; do
   attempt=$((attempt + 1))
   
   if [ $attempt -ge $max_attempts ]; then
@@ -22,6 +23,14 @@ until bundle exec rails runner "ActiveRecord::Base.connection.execute('SELECT 1'
 done
 
 echo "Database is ready!"
+
+# server.pid ファイルを削除（前回の起動の残骸を削除）
+echo "Removing old server.pid if exists..."
+rm -f /rails/tmp/pids/server.pid
+
+# データベースの作成（存在しない場合のみ）
+echo "Creating database if it doesn't exist..."
+bundle exec rails db:create || true
 
 # マイグレーションを実行
 echo "Running database migrations..."

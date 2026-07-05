@@ -6,7 +6,7 @@ class Print < ApplicationRecord
 
   # バリデーション
   validates :image, presence: true
-  validates :deadline, presence: true
+  validate :deadline_cannot_be_in_the_past
   validates :action_tag, presence: true
   validates :child_tag, presence: true
 
@@ -33,6 +33,14 @@ class Print < ApplicationRecord
   def self.action_tags_for_select
     action_tags.keys.map do |key|
       [I18n.t("enums.print.action_tag.#{key}"), key]
+    end
+  end
+
+  private
+
+  def deadline_cannot_be_in_the_past
+    if deadline.present? && deadline < Date.today
+      errors.add(:deadline, 'に過去の日付を設定することはできません')
     end
   end
 end
