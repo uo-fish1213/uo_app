@@ -1,0 +1,17 @@
+<div class="print-detail">
+  <!-- プリント画像 -->
+  <%= image_tag @print.image_url, class: 'print-image' %>
+  
+  <!-- 締め切り日 -->
+  <p>締め切り日: <%= @print.deadline %></p>
+  
+  <!-- 子供タグ -->
+  <p>子供: <%= @print.child_tags.map(&:name).join(', ') %></p>
+  
+  <!-- アクションタグ -->
+  <p>アクション: <%= @print.action_tags.map(&:name).join(', ') %></p>
+  
+  <!-- ボタン -->
+  <%= link_to '一覧へ戻る', prints_path, class: 'btn' %>
+  <%= button_to '削除', print_path(@print), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger' %>
+</div>

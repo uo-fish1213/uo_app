@@ -10,6 +10,12 @@ class PrintsController < ApplicationController
   def show
     @print = Print.find(params[:id])
   end
+  #　プリント詳細画面で、プリント削除のアクション
+  def destroy
+    @print = Print.find(params[:id])
+    @print.destroy
+    redirect_to prints_path, notice: 'プリントを削除しました'
+  end
   
   # プリント登録画面の表示
   def new
