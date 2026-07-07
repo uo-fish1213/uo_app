@@ -35,7 +35,7 @@
     <%= submit_tag '連携する', 
         class: 'btn-common',
         data: { turbo_confirm: current_user.family.present? ? '現在の家族グループから移動しますがよろしいですか？' : nil } %>
-    <%= link_to '戻る', select_family_connection_path, 
+    <%= link_to '戻る', family_connection_select_path, 
         class: 'btn-common' %>
   </div>
       </div>
