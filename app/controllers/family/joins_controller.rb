@@ -1,11 +1,20 @@
 class Family::JoinsController < ApplicationController
-  # 既存家族コード入力画面
+  before_action :require_login
+
   def new
-    @family_code = FamilyCode.new
+     @simple_header = true
   end
-  
-  # 既存コードで参加する処理
+
   def create
-    # コード入力で参加する処理
+    family_code = params[:family_code]
+    family = Family.find_by(family_code: family_code)
+
+    if family
+      current_user.update(family: family)
+      flash.now[:notice] = t('family.joins.joined_successfully')
+    else
+      flash.now[:alert] = t('family.joins.family_code_not_found')
+      render :new, status: :unprocessable_entity
+    end
   end
 end
