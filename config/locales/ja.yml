@@ -33,4 +33,8 @@ ja:
         payment:  現金いるよ（集金・引き落とし）
         event: 当日見てね（イベント・行事）
         read_only: 読むだけでOK（お知らせ・チラシなど)
+  family:
+    joins:
+      family_code_not_found: 入力された家族コードは存在しません
+      joined_successfully: 家族グループに連携しました
   

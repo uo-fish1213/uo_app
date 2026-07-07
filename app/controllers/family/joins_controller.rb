@@ -6,14 +6,15 @@ class Family::JoinsController < ApplicationController
   end
 
   def create
-    family = Family.find_by(family_code: params[:family_code])
+    family_code = params[:family_code]
+    family = Family.find_by(family_code: family_code)
 
     if family
       current_user.update(family: family)
-      redirect_to root_path, notice: '家族コードで連携しました'
+      flash.now[:notice] = t('family.joins.joined_successfully')
     else
-      flash.now[:alert] = '家族コードが見つかりませんでした'
-      render :new
+      flash.now[:alert] = t('family.joins.family_code_not_found')
+      render :new, status: :unprocessable_entity
     end
   end
 end
