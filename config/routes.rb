@@ -15,10 +15,9 @@ Rails.application.routes.draw do
   
   namespace :family do
     resource :connection, only: [:new, :create] do
-      collection do
-        get :select
-      end
+        get :select, on: :collection
     end
+    
     resources :codes, only: [:new, :create]
     resource :join, only: [:new, :create]
   end

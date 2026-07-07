@@ -1,11 +1,19 @@
 class Family::JoinsController < ApplicationController
-  # 既存家族コード入力画面
+  before_action :require_login
+
   def new
-    @family_code = FamilyCode.new
+    # 家族コード入力画面を表示
   end
-  
-  # 既存コードで参加する処理
+
   def create
-    # コード入力で参加する処理
+    family = Family.find_by(family_code: params[:family_code])
+
+    if family
+      current_user.update(family: family)
+      redirect_to root_path, notice: '家族コードで連携しました'
+    else
+      flash.now[:alert] = '家族コードが見つかりませんでした'
+      render :new
+    end
   end
 end

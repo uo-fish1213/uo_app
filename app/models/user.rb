@@ -40,4 +40,10 @@ class User < ApplicationRecord
       self.family_id = family.id  # 既存の家族に紐付け
     end
   end
+   # 家族経由でパートナーのプリントも取得できるように
+  def family_prints
+    return Print.none unless family_id.present?
+    
+    Print.joins(:user).where(users: { family_id: family_id })
+  end
 end
