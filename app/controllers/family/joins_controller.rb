@@ -2,7 +2,7 @@ class Family::JoinsController < ApplicationController
   before_action :require_login
 
   def new
-    # 家族コード入力画面を表示
+     @simple_header = true
   end
 
   def create

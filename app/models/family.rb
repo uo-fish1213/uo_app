@@ -1,10 +1,13 @@
 class Family < ApplicationRecord
-  # 関連付け
+  before_create :generate_family_code
+
   has_many :users, dependent: :nullify
 
   # バリデーション
-  validates :family_code, presence: true, uniqueness: true
+  validates :family_code, presence: true, uniqueness: true, on: :update
   
+  private
+
   def generate_family_code
     loop do
       self.family_code = SecureRandom.alphanumeric(8).upcase
