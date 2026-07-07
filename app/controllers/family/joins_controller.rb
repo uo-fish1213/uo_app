@@ -17,4 +17,13 @@ class Family::JoinsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  
+   private
+  
+  # 既に家族に参加している場合は参加画面にアクセスさせない
+  def check_not_joined
+    if current_user.family.present?
+      redirect_to family_connection_select_path, alert: t('family.joins.already_joined')
+    end
+  end
 end
