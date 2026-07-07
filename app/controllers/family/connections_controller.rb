@@ -1,7 +1,6 @@
 class Family::ConnectionsController < ApplicationController
   before_action :require_login
-  before_action :check_family_exists, only: [:new, :create]
-
+  before_action :check_family_exists, only: [:create]
   # 家族連携画面（選択画面）
   def select
     # 家族の有無によって表示を切り替える画面
@@ -20,8 +19,10 @@ class Family::ConnectionsController < ApplicationController
     if @family.save
       # 作成した家族にユーザーを紐付け
       current_user.update(family: @family)
-      redirect_to family_connection_select_path, notice: t('family.connections.created_successfully')
+      redirect_to family_connection_select_path, 
+          success: t('family.connections.create.success')
     else
+      flash.now[:danger] = t('family.connections.create.failure')
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,7 +32,8 @@ class Family::ConnectionsController < ApplicationController
   # 既に家族に参加している場合は発行画面にアクセスさせない
   def check_family_exists
     if current_user.family.present?
-      redirect_to family_connection_select_path, alert: t('family.connections.already_joined')
+      redirect_to family_connection_select_path, 
+                  warning: '既に家族コードを発行済みです'
     end
   end
   

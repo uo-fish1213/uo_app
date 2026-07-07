@@ -19,8 +19,10 @@ Rails.application.routes.draw do
     get 'connections/select', to: 'connections#select', as: :connection_select
     
     # 家族コード発行
-    resources :connections, only: [:new, :create]
-    
+    resources :connections, only: [:new, :create] do
+       get :select, on: :collection
+    end
+
     # 既存コードで参加
     resource :join, only: [:new, :create]
   end
