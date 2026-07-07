@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       print: プリント
+      family: 家族
     attributes:
       print:
         child_tag: 子ども
@@ -19,7 +20,7 @@ ja:
             deadline:
               blank: が未選択です
             image:
-              blank: を選択してください        
+              blank: を選択してください
   enums:
     print:
       child_tag:
@@ -28,13 +29,16 @@ ja:
         third_child: 第3子
         fourth_child: 第4子
       action_tag:
-        submit: 出してね（提出）
-        prepare: 用意してね（持ち物）
-        payment:  現金いるよ（集金・引き落とし）
-        event: 当日見てね（イベント・行事）
-        read_only: 読むだけでOK（お知らせ・チラシなど)
+        submit: 出してね(提出)
+        prepare: 用意してね(持ち物)
+        payment: 現金いるよ(集金・引き落とし)
+        event: 当日見てね(イベント・行事)
+        read_only: 読むだけでOK(お知らせ・チラシなど)
   family:
     joins:
       family_code_not_found: 入力された家族コードは存在しません
       joined_successfully: 家族グループに連携しました
-  
+    connections:
+      create:
+        success: 家族コードを発行しました
+        failure: 家族コードの発行に失敗しました

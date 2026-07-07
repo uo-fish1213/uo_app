@@ -22,7 +22,11 @@
       <div class="option-card">
         <h3>新しく家族コードを発行する</h3>
         <p>新しい家族グループを作成します</p>
-        <%= link_to '家族コードを発行する', new_family_connection_path, class: 'btn-common' %>
+        <%= button_to '家族コードを発行する', 
+            family_connections_path, 
+            method: :post,
+            class: 'btn-common',
+            form: { data: { turbo_confirm: '家族コードを発行します。よろしいですか？' } } %>
       </div>
 
       <div class="option-card">
