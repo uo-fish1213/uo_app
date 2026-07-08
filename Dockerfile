@@ -55,3 +55,5 @@ RUN apt-get update -qq && apt-get install -y \
   nodejs \
   imagemagick \
   libmagickwand-dev
+
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
