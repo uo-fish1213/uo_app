@@ -56,4 +56,4 @@ RUN apt-get update -qq && apt-get install -y \
   imagemagick \
   libmagickwand-dev
 
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["sh", "-c", "bundle exec rails db:migrate && bundle exec puma -C config/puma.rb"]
