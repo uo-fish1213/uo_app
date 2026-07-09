@@ -1,8 +1,9 @@
-<div class="prints-container">
-  <div class="prints-header">
-    <h1 class="page-title">プリント一覧</h1>
-    <%= link_to "新規プリント登録", new_print_path, class: "btn-common" %>
-  </div>
+<div class="prints-index">
+  <div class="prints-container">
+    <div class="prints-header">
+      <h1 class="page-title">プリント一覧</h1>
+      <%= link_to "新規プリント登録", new_print_path, class: "btn-common" %>
+    </div>
 
   <% if @prints.any? %>
     <div class="prints-grid">
@@ -56,4 +57,5 @@
       <p>プリントがまだありません</p>
     </div>
   <% end %>
+  </div>
 </div>
