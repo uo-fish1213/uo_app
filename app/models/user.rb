@@ -32,14 +32,35 @@ class User < ApplicationRecord
     family.prints
   end
 
+  # 家族が変更される前に、ユーザー0の家族コードを破棄
+  before_update :destroy_empty_family, if: :will_save_change_to_family_id?
+
   private
   
   def validate_family_code
-    family = Family.find_by(code: family_code)
+    family = Family.find_by(family_code: family_code)  # ここも family_code に統一
     if family.nil?
       errors.add(:family_code, 'に誤りがあります')
     else
       self.family_id = family.id  # 既存の家族に紐付け
+    end
+  end
+
+  # ユーザーが0人になった家族を削除する
+  def destroy_empty_family
+    # 変更前の family_id を取得
+    old_family_id = family_id_was
+    
+    # 変更前の家族が存在しない場合は何もしない
+    return unless old_family_id
+    
+    # 変更前の家族を取得
+    old_family = Family.find_by(id: old_family_id)
+    
+    # 古い家族が存在し、自分以外にユーザーがいない場合は削除
+    if old_family && old_family.users.where.not(id: id).count.zero?
+      old_family.destroy
+      Rails.logger.info "Family #{old_family.family_code} was destroyed because it had no users"
     end
   end
 end
