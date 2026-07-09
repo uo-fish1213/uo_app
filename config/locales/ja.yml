@@ -41,4 +41,5 @@ ja:
     connections:
       create:
         success: 家族コードを発行しました
+        updated_successfully: '家族コードを更新しました'
         failure: 家族コードの発行に失敗しました
