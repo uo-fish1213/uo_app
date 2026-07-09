@@ -3,7 +3,7 @@ class PrintsController < ApplicationController
   
   # プリント一覧画面の表示(締め切りが近い順に表示)
   def index
-    @prints = current_user.prints.order(deadline: :asc)
+    @prints = current_user.family_prints.order(deadline: :asc)
   end
   
   # プリント詳細画面の表示

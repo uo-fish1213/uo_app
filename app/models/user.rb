@@ -9,26 +9,28 @@ class User < ApplicationRecord
   attr_accessor :family_code
 
   # バリデーション
-  # メールアドレスのバリデーション
   validates :email, presence: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP },
                     uniqueness: true
 
-  # ユーザー名のバリデーション
   validates :user_name, presence: true, length: { minimum: 2, maximum: 20 }
 
-  # パスワードのバリデーション（Sorcery用）
   validates :password, length: { minimum: 8 },
                        format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i,
                                  message: "は英字と数字の両方を含めてください" },
                        if: -> { new_record? || changes[:crypted_password] }
 
-  # パスワード確認のバリデーション（Sorcery用）
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
-  # family_code が入力されている場合のみ検証
   validate :validate_family_code, if: -> { family_code.present? }
+
+  # 家族経由でパートナーのプリントも取得できるように
+  def family_prints
+    return Print.none unless family
+  
+    family.prints
+  end
 
   private
   
@@ -39,11 +41,5 @@ class User < ApplicationRecord
     else
       self.family_id = family.id  # 既存の家族に紐付け
     end
-  end
-   # 家族経由でパートナーのプリントも取得できるように
-  def family_prints
-    return Print.none unless family_id.present?
-    
-    Print.joins(:user).where(users: { family_id: family_id })
   end
 end
