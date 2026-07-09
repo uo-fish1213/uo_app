@@ -69,3 +69,4 @@ gem 'rails-i18n'
 gem 'mini_magick', '~> 4.11'
 gem 'dotenv-rails', groups: [:development, :test]
 # gem 'bootstrap', '~> 5.2.0'
+gem "aws-sdk-s3", require: false
