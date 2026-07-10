@@ -1,6 +1,15 @@
 <div class="print-detail">
   <!-- プリント画像 -->
-  <%= image_tag @print.image.url, class: 'print-image' %>
+  <% if @print.image? %>
+  <%= image_tag @print.image.url(expires_in: 1.day), class: 'print-image', alt: 'プリント画像' %>
+  <% else %>
+    <div class="print-image-placeholder">
+      <span class="placeholder-text">
+        <i class="bi bi-image"></i>
+        画像が登録されていません
+      </span>
+    </div>
+  <% end %>
   
   <!-- 締め切り日 -->
   <p>締め切り日: <%= @print.deadline %></p>
