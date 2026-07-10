@@ -27,6 +27,10 @@ ja:
               blank: が未選択です
             image:
               blank: を選択してください
+        user:
+          attributes:
+             email:
+              taken: の値は無効です
   enums:
     print:
       child_tag:
