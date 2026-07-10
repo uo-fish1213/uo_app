@@ -3,7 +3,13 @@ ja:
     models:
       print: プリント
       family: 家族
+      user: ユーザー
     attributes:
+      user:
+        email: メールアドレス
+        user_name: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード（確認）
       print:
         child_tag: 子ども
         action_tag: アクション
