@@ -21,7 +21,6 @@ class Family::JoinsController < ApplicationController
       else
         flash[:notice] = t('family.joins.updated_successfully')
       end
-      
       redirect_to family_connection_select_path
     else
       flash.now[:alert] = t('family.joins.family_code_not_found')

@@ -48,8 +48,9 @@ ja:
     joins:
       family_code_not_found: 入力された家族コードは存在しません
       joined_successfully: 家族グループに連携しました
+      updated_successfully: '家族コードを更新しました'
     connections:
       create:
         success: 家族コードを発行しました
-        updated_successfully: '家族コードを更新しました'
+        updated_successfully: 家族コードを更新しました
         failure: 家族コードの発行に失敗しました
