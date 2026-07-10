@@ -4,11 +4,13 @@
   
   <div class="mb-5">
     <%= f.label :image, "画像", class: "form-label" %>
+    <span class="text-danger">*</span>
     <%= f.file_field :image, class: "form-control", accept: 'image/*' %>
   </div>
   
   <div class="mb-5">
     <%= f.label :child_tag, "子ども選択", class: "form-label" %>
+    <span class="text-danger">*</span>
     <%= f.select :child_tag, 
                  Print.child_tags.keys.map { |k| [I18n.t("enums.print.child_tag.#{k}"), k] }, 
                  { prompt: "選択してください" }, 
@@ -17,6 +19,7 @@
   
   <div class="mb-5">
     <%= f.label :action_tag, "アクションタグ", class: "form-label" %>
+    <span class="text-danger">*</span>
     <%= f.select :action_tag, 
                  Print.action_tags.keys.map { |k| [I18n.t("enums.print.action_tag.#{k}"), k] }, 
                  { prompt: "選択してください" }, 
